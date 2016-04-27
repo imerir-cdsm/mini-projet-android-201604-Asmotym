@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/albumImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true"
+                android:background="#000" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_toEndOf="@id/albumImage"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/albumTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlack"
+                    android:text="Album title"/>
+
+                <TextView
+                    android:id="@+id/albumArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/albumTitle"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorGrey"
+                    android:text="Album artist"/>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+    </FrameLayout>
+
+</LinearLayout>

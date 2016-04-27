@@ -1,14 +1,20 @@
 package com.partiel_android_boucher.classes;
 
+import io.realm.RealmObject;
+
 /**
  * Created by boucherclement on 27/04/16.
  */
-public class Artist {
+public class Artist extends RealmObject {
     private int pid;
     private String fname;
     private String lname;
     private String infoUrl;
     private String photoUrl;
+
+    public Artist(){
+
+    }
 
     public Artist(int _pid, String _fname, String _lname, String _infoUrl, String _photoUrl){
         setPid(_pid);
@@ -17,7 +23,6 @@ public class Artist {
         setInfoUrl(_infoUrl);
         setPhotoUrl(_photoUrl);
     }
-
 
     public int getPid() {
         return pid;
