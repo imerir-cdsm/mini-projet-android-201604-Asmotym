@@ -17,6 +17,7 @@ import com.partiel_android_boucher.classes.adapters.AlbumsAdapter;
 import com.partiel_android_boucher.controllers.AlbumController;
 
 import java.util.ArrayList;
+import android.os.Handler;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -24,6 +25,8 @@ import io.realm.RealmConfiguration;
 public class AlbumsFragment extends Fragment {
     private ListView albumsList;
     private Realm realm;
+    private ArrayList<Album> albums;
+
     public AlbumsFragment(){
 
     }
@@ -45,14 +48,15 @@ public class AlbumsFragment extends Fragment {
     public void onResume(){
         super.onResume();
 
-        ArrayList<Album> albums = new ArrayList<>();
-        albums.add(new Album(1, "A", 1, 1, "fdsf"));
-        albums.add(new Album(2, "B", 2, 1, "fdsdfsdf"));
+        albums = AlbumController.getAllAlbums(getContext());
 
-        AlbumController.getAllAlbums(getContext());
-
-        albumsList = (ListView) getView().findViewById(R.id.albumsList);
-        AlbumsAdapter albumsAdapter = new AlbumsAdapter(getView().getContext(), realm, albums);
-        albumsList.setAdapter(albumsAdapter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                albumsList = (ListView) getView().findViewById(R.id.albumsList);
+                AlbumsAdapter albumsAdapter = new AlbumsAdapter(getView().getContext(), realm, albums);
+                albumsList.setAdapter(albumsAdapter);
+            }
+        }, 2000);
     }
 }

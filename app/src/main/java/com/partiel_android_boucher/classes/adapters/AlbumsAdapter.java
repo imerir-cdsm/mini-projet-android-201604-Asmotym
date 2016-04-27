@@ -21,9 +21,7 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 
-/**
- * Created by boucherclement on 27/04/16.
- */
+
 public class AlbumsAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     ArrayList<Album> albums;
@@ -57,25 +55,18 @@ public class AlbumsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-
         if (convertView == null) {
-            viewHolder = new ViewHolder();
-
             convertView = layoutInflater.inflate(R.layout.tab_albums_item, parent, false);
-
-            viewHolder.albumImage = (ImageView) convertView.findViewById(R.id.albumImage);
-            viewHolder.titleAlbum = (TextView) convertView.findViewById(R.id.albumTitle);
-            viewHolder.artistAlbum = (TextView) convertView.findViewById(R.id.albumArtist);
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
         }
         Album album = albums.get(position);
 
-        viewHolder.titleAlbum.setText(album.getTitle());
-        //viewHolder.artistAlbum.setText(RealmAlbum.getAlbumArtist(realm, album.getArtist()));
+        ImageView albumImage = (ImageView) convertView.findViewById(R.id.albumImage);
+        TextView title = (TextView) convertView.findViewById(R.id.albumTitle);
+        TextView artist = (TextView) convertView.findViewById(R.id.albumArtist);
+
+        //TODO Load image
+        title.setText(album.getTitle());
+        //TODO Get real artist name
 
         return convertView;
     }
