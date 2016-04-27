@@ -28,10 +28,7 @@ import io.realm.RealmConfiguration;
 
 
 public class MainActivity extends AppCompatActivity {
-    ListView albumsList;
-    Realm realm;
     ViewPager viewPager;
-    FragmentPagerAdapter pagerAdapter;
     TabLayout tabLayout;
 
     @Override

@@ -63,4 +63,8 @@ public class Artist extends RealmObject {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
+
+    public String toString(){
+        return getFname() + " " + getLname();
+    }
 }

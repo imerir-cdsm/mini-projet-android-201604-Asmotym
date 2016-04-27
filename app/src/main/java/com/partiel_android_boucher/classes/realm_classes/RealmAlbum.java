@@ -25,7 +25,7 @@ public class RealmAlbum {
     public static String getAlbumArtist(Realm _realm, int _pid){
         String artistName;
         _realm.beginTransaction();
-        artistName = _realm.where(Artist.class).equalTo("aid", _pid).findFirst().toString();
+        artistName = _realm.where(Artist.class).equalTo("pid", _pid).findFirst().toString();
         _realm.commitTransaction();
         return artistName;
     }
