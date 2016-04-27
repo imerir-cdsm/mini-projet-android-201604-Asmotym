@@ -36,6 +36,8 @@ public class AlbumsAdapter extends BaseAdapter {
         this.context = _context;
         this.albums = _albums;
         this.realm = _realm;
+
+        layoutInflater = LayoutInflater.from(_context);
     }
 
     @Override
@@ -45,7 +47,7 @@ public class AlbumsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return albums.get(position).getAid();
+        return 0;
     }
 
     @Override
@@ -60,6 +62,8 @@ public class AlbumsAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
 
+            convertView = layoutInflater.inflate(R.layout.tab_albums_item, parent, false);
+
             viewHolder.albumImage = (ImageView) convertView.findViewById(R.id.albumImage);
             viewHolder.titleAlbum = (TextView) convertView.findViewById(R.id.albumTitle);
             viewHolder.artistAlbum = (TextView) convertView.findViewById(R.id.albumArtist);
@@ -68,11 +72,10 @@ public class AlbumsAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         Album album = albums.get(position);
 
         viewHolder.titleAlbum.setText(album.getTitle());
-        viewHolder.artistAlbum.setText(RealmAlbum.getAlbumArtist(realm, album.getArtist()));
+        //viewHolder.artistAlbum.setText(RealmAlbum.getAlbumArtist(realm, album.getArtist()));
 
         return convertView;
     }

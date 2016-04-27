@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="70dp">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -44,13 +46,6 @@
                     android:textColor="@color/colorGrey"
                     android:text="Album artist"/>
             </RelativeLayout>
-
-
         </RelativeLayout>
-
-
-
-
     </FrameLayout>
-
 </LinearLayout>
