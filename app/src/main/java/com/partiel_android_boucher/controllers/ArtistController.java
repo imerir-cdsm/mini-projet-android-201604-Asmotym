@@ -22,6 +22,10 @@ import io.realm.Realm;
 
 public class ArtistController {
 
+    /**
+     * Download all artists into Realm
+     * @param _context
+     */
     public static void downloadAllArtists(Context _context){
         String url = GlobalVariables.BASE_URL+GlobalVariables.ARTISTS;
         AQuery aq = new AQuery(_context);
@@ -36,7 +40,6 @@ public class ArtistController {
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
-                //ArtistsFragment.setUpAdapter(RealmArtist.getAllArtist(RealmConfig.realm));
             }
         });
     }

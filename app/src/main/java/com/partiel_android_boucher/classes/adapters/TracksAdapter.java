@@ -55,8 +55,8 @@ public class TracksAdapter extends BaseAdapter {
         TextView trackDuration = (TextView) convertView.findViewById(R.id.trackDuration);
 
         trackName.setText(track.getTid() + ". " + track.getTitle());
-        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-        trackDuration.setText(sdf.format(track.getDuration()));
+
+        trackDuration.setText(track.getDuration());
 
         return convertView;
     }

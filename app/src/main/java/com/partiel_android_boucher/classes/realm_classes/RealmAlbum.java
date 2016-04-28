@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-/**
- * Created by boucherclement on 27/04/16.
- */
 public class RealmAlbum {
 
-    /*
-    Copy an object into realm
+    /**
+     * Copy an object into realm
+     * @param _realm
+     * @param _album
      */
     public static void copyToRealm(Realm _realm, Album _album){
         _realm.beginTransaction();
@@ -22,8 +21,10 @@ public class RealmAlbum {
         _realm.commitTransaction();
     }
 
-    /*
-    Create a realm object with a json
+    /**
+     * Create a realm object with a json
+     * @param _realm
+     * @param _json
      */
     public static void createObjectFromJson(Realm _realm, String _json){
         _realm.beginTransaction();
@@ -31,8 +32,11 @@ public class RealmAlbum {
         _realm.commitTransaction();
     }
 
-    /*
-    Get the name of the artist for an album
+    /**
+     * Get the name of the artist for an album
+     * @param _realm
+     * @param _pid
+     * @return
      */
     public static String getAlbumArtist(Realm _realm, int _pid){
         String artistName;
@@ -42,8 +46,10 @@ public class RealmAlbum {
         return artistName;
     }
 
-    /*
-    Get all albums
+    /**
+     * Get all albums
+     * @param _realm
+     * @return
      */
     public static ArrayList<Album> getAllAlbum(Realm _realm){
         _realm.beginTransaction();
@@ -61,8 +67,11 @@ public class RealmAlbum {
         }
     }
 
-    /*
-    Get an album with the id
+    /**
+     * Get an album with the id
+     * @param _realm
+     * @param _aid
+     * @return
      */
     public static Album getAlbumByPid(Realm _realm, int _aid){
         _realm.beginTransaction();
@@ -71,8 +80,11 @@ public class RealmAlbum {
         return album;
     }
 
-    /*
-    Get the number of album of an artist
+    /**
+     * Get the number of album of an artist
+     * @param _realm
+     * @param _pid
+     * @return
      */
     public static int getNbAlbumsByArtist(Realm _realm, int _pid) {
         _realm.beginTransaction();
@@ -81,13 +93,16 @@ public class RealmAlbum {
         return results.size();
     }
 
-    /*
-    Clear realm of Album class
+    /**
+     * Clear realm of Album class
+     * @param _realm
      */
     public static void clearAlbums(Realm _realm) {
         _realm.beginTransaction();
         _realm.delete(Album.class);
         _realm.commitTransaction();
     }
+
+
 
 }

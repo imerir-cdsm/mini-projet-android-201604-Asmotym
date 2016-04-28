@@ -25,6 +25,10 @@ import io.realm.RealmConfiguration;
 
 public class AlbumController {
 
+    /**
+     * Download into Realm all albums
+     * @param _context
+     */
     public static void downloadAllAlbums(Context _context){
         String url = GlobalVariables.BASE_URL+GlobalVariables.ALBUMS_URI;
         AQuery aq = new AQuery(_context);
@@ -35,16 +39,20 @@ public class AlbumController {
                 try {
                     for (int i = 0; i < json.length(); i++){
                         String object = json.getJSONObject(i).toString();
-                        RealmAlbum.creatObjectFromJson(RealmConfig.realm, object);
+                        RealmAlbum.createObjectFromJson(RealmConfig.realm, object);
                     }
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
-                //AlbumsFragment.setUpAdapter(RealmAlbum.getAllAlbum(RealmConfig.realm));
             }
         });
     }
 
+    /**
+     * Download an Artist into Realm with an id
+     * @param _context
+     * @param _pid
+     */
     public static void downloadArtistByPid(Context _context, int _pid){
         String url = GlobalVariables.BASE_URL+GlobalVariables.ARTISTS_PID+_pid;
         AQuery aq = new AQuery(_context);

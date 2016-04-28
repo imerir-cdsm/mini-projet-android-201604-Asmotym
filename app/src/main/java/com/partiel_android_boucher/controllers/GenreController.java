@@ -17,6 +17,10 @@ import org.json.JSONException;
  */
 public class GenreController {
 
+    /**
+     * Download all genres into realm
+     * @param _context
+     */
     public static void downloadAllGenres(Context _context) {
         String url = GlobalVariables.BASE_URL + GlobalVariables.GENRES_URI;
         AQuery aq = new AQuery(_context);
@@ -31,7 +35,6 @@ public class GenreController {
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
-                //GenresFragment.setUpAdapter(RealmGenre.getAllGenre(RealmConfig.realm));
             }
         });
     }

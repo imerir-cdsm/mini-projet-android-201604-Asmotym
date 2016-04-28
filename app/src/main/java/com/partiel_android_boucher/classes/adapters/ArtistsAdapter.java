@@ -18,9 +18,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * Created by Asmotym on 27/04/2016.
- */
 public class ArtistsAdapter extends BaseAdapter {
     ArrayList<Artist> artists;
     LayoutInflater layoutInflater;

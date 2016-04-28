@@ -21,6 +21,7 @@ import com.partiel_android_boucher.classes.realm_classes.RealmAlbum;
 import com.partiel_android_boucher.classes.realm_classes.RealmArtist;
 import com.partiel_android_boucher.classes.realm_classes.RealmTrack;
 import com.partiel_android_boucher.controllers.AlbumController;
+import com.partiel_android_boucher.controllers.TrackController;
 import com.partiel_android_boucher.tools.GlobalVariables;
 import com.partiel_android_boucher.tools.RealmConfig;
 
@@ -78,9 +79,8 @@ class OnAlbumItemClickListener implements ListView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        RealmTrack.clearTracks(RealmConfig.realm);
         Album album = (Album) albumsAdapter.getItem(position);
-        Toast.makeText(view.getContext(), album.getTitle(), Toast.LENGTH_SHORT).show();
+        TrackController.downloadTracksWithAid(view.getContext(), album.getAid());
         Intent intent = new Intent(view.getContext(), AlbumDetailsActivity.class);
         intent.putExtra("aid", album.getAid());
         view.getContext().startActivity(intent);

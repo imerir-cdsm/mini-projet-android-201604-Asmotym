@@ -14,6 +14,11 @@ import org.json.JSONException;
 
 public class TrackController {
 
+    /**
+     * Download all track with album id into Realm
+     * @param _context
+     * @param _aid
+     */
     public static void downloadTracksWithAid(Context _context, int _aid) {
         String url = GlobalVariables.BASE_URL + GlobalVariables.ALBUMS_URI + "/" + _aid + GlobalVariables.TRACKS_URI;
         AQuery aq = new AQuery(_context);
@@ -21,9 +26,10 @@ public class TrackController {
             @Override
             public void callback(String url, JSONArray json, AjaxStatus status) {
                 try {
+                    
                     for (int i = 0; i < json.length(); i++) {
                         String object = json.getJSONObject(i).toString();
-                        RealmTrack.creatObjectFromJson(RealmConfig.realm, object);
+                        RealmTrack.createObjectFromJson(RealmConfig.realm, object);
                     }
                 } catch (JSONException jse) {
                     jse.printStackTrace();
