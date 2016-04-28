@@ -34,4 +34,11 @@ public class RealmTrack {
         return tracks;
     }
 
+    public static int getNbTracks(Realm _realm) {
+        _realm.beginTransaction();
+        int nbTrack = _realm.where(Track.class).findAll().size();
+        _realm.commitTransaction();
+        return nbTrack;
+    }
+
 }

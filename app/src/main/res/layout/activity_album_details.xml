@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     tools:context="com.partiel_android_boucher.activities.AlbumDetailsActivity">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/details"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:padding="10dp"
@@ -64,6 +65,18 @@
 
         </RelativeLayout>
 
-    </FrameLayout>
+        <ListView
+            android:id="@+id/listTracks"
+            android:layout_below="@id/details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+
+    </RelativeLayout>
+
+
+
 
 </RelativeLayout>

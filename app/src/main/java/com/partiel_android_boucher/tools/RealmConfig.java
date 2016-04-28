@@ -12,7 +12,7 @@ public class RealmConfig {
     public static Realm realm;
 
     public static void configure(Context _context){
-        realmConfiguration = new RealmConfiguration.Builder(_context).build();
+        realmConfiguration = new RealmConfiguration.Builder(_context).deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(realmConfiguration);
         realm = Realm.getDefaultInstance();
     }
