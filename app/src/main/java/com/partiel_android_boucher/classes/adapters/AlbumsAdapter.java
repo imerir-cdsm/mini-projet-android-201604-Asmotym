@@ -1,6 +1,7 @@
 package com.partiel_android_boucher.classes.adapters;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import com.partiel_android_boucher.R;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.Artist;
 import com.partiel_android_boucher.classes.realm_classes.RealmAlbum;
+import com.partiel_android_boucher.classes.realm_classes.RealmArtist;
 import com.partiel_android_boucher.controllers.AlbumController;
+import com.partiel_android_boucher.tools.RealmConfig;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -30,16 +33,13 @@ public class AlbumsAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     ArrayList<Album> albums;
     Context context;
-    Realm realm;
     ImageView albumImage;
     TextView albumTitle;
     TextView albumArtist;
-    View convertView;
 
-    public AlbumsAdapter(Context _context, Realm _realm, ArrayList<Album> _albums){
+    public AlbumsAdapter(Context _context, ArrayList<Album> _albums){
         this.context = _context;
         this.albums = _albums;
-        this.realm = _realm;
 
         layoutInflater = LayoutInflater.from(_context);
     }
@@ -61,24 +61,23 @@ public class AlbumsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        this.convertView = convertView;
-        if (this.convertView == null) {
-            this.convertView = layoutInflater.inflate(R.layout.tab_albums_item, parent, false);
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.tab_albums_item, parent, false);
         }
         Album album = albums.get(position);
 
-        albumImage = (ImageView) this.convertView.findViewById(R.id.albumImage);
-        albumTitle = (TextView) this.convertView.findViewById(R.id.albumTitle);
-        albumArtist = (TextView) this.convertView.findViewById(R.id.albumArtist);
+        albumImage = (ImageView) convertView.findViewById(R.id.albumImage);
+        albumTitle = (TextView) convertView.findViewById(R.id.albumTitle);
+        albumArtist = (TextView) convertView.findViewById(R.id.albumArtist);
 
         Picasso.with(this.context).load(album.getPhotoUrl()).resize(50, 50).centerCrop().into(albumImage);
         albumTitle.setText(album.getTitle());
 
-        //artist = AlbumController.getArtistByPid(this.context, album.getArtist());
-        //albumArtist.setText(artist.toString());
-
-
-        //new Handler().postDelayed(new AlbumsRunnable(this.context, album.getArtist(), albumArtist), 1000);
+        if (RealmArtist.getArtistByPid(RealmConfig.realm, album.getArtist()) == null) {
+            AlbumController.downloadArtistByPid(this.context, album.getArtist());
+        }
+        Artist artist = RealmArtist.getArtistByPid(RealmConfig.realm, album.getArtist());
+        albumArtist.setText(artist.toString());
 
         return convertView;
     }
@@ -98,7 +97,7 @@ class AlbumsRunnable implements Runnable {
 
     @Override
     public void run() {
-        artist = AlbumController.getArtistByPid(this.context, this.pid);
+        //artist = AlbumController.getArtistByPid(this.context, this.pid);
         textView.setText(artist.toString());
     }
 }

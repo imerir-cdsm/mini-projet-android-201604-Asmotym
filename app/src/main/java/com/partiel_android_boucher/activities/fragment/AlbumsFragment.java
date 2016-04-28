@@ -14,7 +14,10 @@ import com.partiel_android_boucher.R;
 import com.partiel_android_boucher.activities.MainActivity;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.adapters.AlbumsAdapter;
+import com.partiel_android_boucher.classes.realm_classes.RealmAlbum;
 import com.partiel_android_boucher.controllers.AlbumController;
+import com.partiel_android_boucher.tools.GlobalVariables;
+import com.partiel_android_boucher.tools.RealmConfig;
 
 import java.util.ArrayList;
 import android.os.Handler;
@@ -24,7 +27,6 @@ import io.realm.RealmConfiguration;
 
 public class AlbumsFragment extends Fragment {
     private ListView albumsList;
-    private Realm realm;
     private ArrayList<Album> albums;
 
     public AlbumsFragment(){
@@ -39,22 +41,22 @@ public class AlbumsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(container.getContext()).build();
-        realm = Realm.getInstance(realmConfiguration);
-
         return inflater.inflate(R.layout.tab_albums, container, false);
     }
 
     public void onResume(){
         super.onResume();
 
-        albums = AlbumController.getAllAlbums(getContext());
+        if (RealmAlbum.getAllAlbum(RealmConfig.realm).size() == 0) {
+            AlbumController.downloadAllAlbums(getContext());
+        }
+        albums = RealmAlbum.getAllAlbum(RealmConfig.realm);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 albumsList = (ListView) getView().findViewById(R.id.albumsList);
-                AlbumsAdapter albumsAdapter = new AlbumsAdapter(getView().getContext(), realm, albums);
+                AlbumsAdapter albumsAdapter = new AlbumsAdapter(getView().getContext(), albums);
                 albumsList.setAdapter(albumsAdapter);
             }
         }, 2000);

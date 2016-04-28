@@ -21,13 +21,11 @@ import java.util.ArrayList;
  */
 public class ArtistsAdapter extends BaseAdapter {
     ArrayList<Artist> artists;
-    Realm realm;
     LayoutInflater layoutInflater;
     Context context;
 
-    public ArtistsAdapter(Context _context, Realm _realm, ArrayList<Artist> _artists){
+    public ArtistsAdapter(Context _context, ArrayList<Artist> _artists){
         this.artists = _artists;
-        this.realm = _realm;
         this.context = _context;
 
         this.layoutInflater = LayoutInflater.from(_context);
@@ -61,7 +59,6 @@ public class ArtistsAdapter extends BaseAdapter {
 
         Picasso.with(this.context).load(artist.getPhotoUrl()).resize(40, 40).centerCrop().into(artistImage);
         artistName.setText(artist.toString());
-        
 
         return convertView;
     }

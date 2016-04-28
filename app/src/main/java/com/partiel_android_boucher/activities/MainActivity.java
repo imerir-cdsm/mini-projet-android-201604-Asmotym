@@ -20,6 +20,7 @@ import com.partiel_android_boucher.activities.fragment.GenresFragment;
 import com.partiel_android_boucher.activities.pager_adapter.ViewPagerAdapter;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.adapters.AlbumsAdapter;
+import com.partiel_android_boucher.tools.RealmConfig;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setUpPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+
+        RealmConfig.configure(MainActivity.this);
     }
 
     private void setUpPager(ViewPager _viewPager){

@@ -12,7 +12,10 @@ import android.widget.ListView;
 
 import com.partiel_android_boucher.R;
 import com.partiel_android_boucher.classes.Artist;
+import com.partiel_android_boucher.classes.adapters.ArtistsAdapter;
+import com.partiel_android_boucher.classes.realm_classes.RealmArtist;
 import com.partiel_android_boucher.controllers.ArtistController;
+import com.partiel_android_boucher.tools.RealmConfig;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,6 @@ import io.realm.RealmConfiguration;
 
 public class ArtistsFragment extends Fragment {
     private ListView artistsList;
-    private Realm realm;
     ArrayList<Artist> artists;
 
     public  ArtistsFragment(){
@@ -36,9 +38,6 @@ public class ArtistsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(container.getContext()).build();
-        realm = Realm.getInstance(realmConfiguration);
-
         return inflater.inflate(R.layout.tab_artists, container, false);
     }
 
@@ -46,12 +45,17 @@ public class ArtistsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        artists = ArtistController.getAllArtists(getContext());
+        if (RealmArtist.getAllArtist(RealmConfig.realm).size() == 0) {
+            ArtistController.downloadAllArtists(getContext());
+        }
+        artists = RealmArtist.getAllArtist(RealmConfig.realm);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 artistsList = (ListView) getView().findViewById(R.id.artistsList);
+                ArtistsAdapter artistsAdapter = new ArtistsAdapter(getContext(), artists);
+                artistsList.setAdapter(artistsAdapter);
             }
         }, 2000);
     }

@@ -3,7 +3,10 @@ package com.partiel_android_boucher.classes.realm_classes;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.Artist;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by boucherclement on 27/04/16.
@@ -28,6 +31,22 @@ public class RealmAlbum {
         artistName = _realm.where(Artist.class).equalTo("pid", _pid).findFirst().toString();
         _realm.commitTransaction();
         return artistName;
+    }
+
+    public static ArrayList<Album> getAllAlbum(Realm _realm){
+        _realm.beginTransaction();
+        ArrayList<Album> albums = new ArrayList<>();
+        RealmResults<Album> results = _realm.where(Album.class).findAll();
+        if (results.size() == 0) {
+            _realm.commitTransaction();
+            return albums;
+        } else {
+            for (Album album : results) {
+                albums.add(album);
+            }
+            _realm.commitTransaction();
+            return albums;
+        }
     }
 
 }
