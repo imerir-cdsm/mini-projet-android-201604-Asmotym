@@ -31,6 +31,7 @@ public class RealmTrack {
         for (Track track : results){
             tracks.add(track);
         }
+        _realm.commitTransaction();
         return tracks;
     }
 
@@ -39,6 +40,12 @@ public class RealmTrack {
         int nbTrack = _realm.where(Track.class).findAll().size();
         _realm.commitTransaction();
         return nbTrack;
+    }
+
+    public static void clearTracks(Realm _realm) {
+        _realm.beginTransaction();
+        _realm.delete(Track.class);
+        _realm.commitTransaction();
     }
 
 }
