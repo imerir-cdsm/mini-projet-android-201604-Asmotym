@@ -3,6 +3,7 @@ package com.partiel_android_boucher.controllers;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.partiel_android_boucher.activities.fragment.ArtistsFragment;
 import com.partiel_android_boucher.classes.Artist;
 import com.partiel_android_boucher.classes.realm_classes.RealmArtist;
 import com.partiel_android_boucher.classes.realm_classes.RealmGenre;
@@ -35,6 +36,7 @@ public class ArtistController {
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
+                ArtistsFragment.setUpAdapter(RealmArtist.getAllArtist(RealmConfig.realm));
             }
         });
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.partiel_android_boucher.activities.fragment.GenresFragment;
 import com.partiel_android_boucher.classes.realm_classes.RealmGenre;
 import com.partiel_android_boucher.tools.GlobalVariables;
 import com.partiel_android_boucher.tools.RealmConfig;
@@ -31,6 +32,7 @@ public class GenreController {
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
+                GenresFragment.setUpAdapter(RealmGenre.getAllGenre(RealmConfig.realm));
             }
         });
     }

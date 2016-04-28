@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.partiel_android_boucher.R;
@@ -17,6 +18,7 @@ import com.partiel_android_boucher.tools.RealmConfig;
 
 import java.util.ArrayList;
 import android.os.Handler;
+import android.widget.Toast;
 
 import io.realm.Realm;
 
@@ -24,8 +26,9 @@ import io.realm.Realm;
  * Created by boucherclement on 27/04/16.
  */
 public class GenresFragment extends Fragment {
-    private ListView genresList;
+    private static ListView genresList;
     private ArrayList<Genre> genres;
+    private static View view;
 
     public GenresFragment(){
 
@@ -45,20 +48,28 @@ public class GenresFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        view = getView();
+        GenreController.downloadAllGenres(getContext());
+    }
 
-        if (RealmGenre.getAllGenre(RealmConfig.realm).size() == 0) {
-            RealmGenre.clearGenre(RealmConfig.realm);
-            GenreController.downloadAllGenres(getContext());
-        }
-        genres = RealmGenre.getAllGenre(RealmConfig.realm);
+    public static void setUpAdapter(ArrayList<Genre> _genres) {
+        genresList = (ListView) view.findViewById(R.id.genresList);
+        GenresAdapter genresAdapter = new GenresAdapter(view.getContext(), _genres);
+        genresList.setAdapter(genresAdapter);
+        genresList.setOnItemClickListener(new OnGenreItemClickListener(genresAdapter));
+    }
+}
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                genresList = (ListView) getView().findViewById(R.id.genresList);
-                GenresAdapter genresAdapter = new GenresAdapter(getContext(), genres);
-                genresList.setAdapter(genresAdapter);
-            }
-        }, 2000);
+class OnGenreItemClickListener implements ListView.OnItemClickListener {
+    private GenresAdapter genresAdapter;
+
+    public OnGenreItemClickListener(GenresAdapter _genresAdapter) {
+        this.genresAdapter = _genresAdapter;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Genre genre = (Genre) genresAdapter.getItem(position);
+        Toast.makeText(view.getContext(), genre.getName(), Toast.LENGTH_SHORT).show();
     }
 }

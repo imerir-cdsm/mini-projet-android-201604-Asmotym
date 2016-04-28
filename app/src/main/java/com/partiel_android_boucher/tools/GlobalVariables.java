@@ -1,10 +1,5 @@
 package com.partiel_android_boucher.tools;
 
-import io.realm.RealmConfiguration;
-
-/**
- * Created by boucherclement on 27/04/16.
- */
 public class GlobalVariables {
     public static String BASE_URL = "http://mysterious-thicket-90159.herokuapp.com/";
 
@@ -12,4 +7,7 @@ public class GlobalVariables {
     public static String ARTISTS = "artists";
     public static String ARTISTS_PID = "artists/";
     public static String GENRES_URI = "genres";
+
+    public static boolean albumsReady = false;
+    public static boolean artistReady = false;
 }

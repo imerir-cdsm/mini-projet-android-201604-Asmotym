@@ -49,6 +49,13 @@ public class RealmAlbum {
         }
     }
 
+    public static Album getAlbumByPid(Realm _realm, int _aid){
+        _realm.beginTransaction();
+        Album album = _realm.where(Album.class).equalTo("aid", _aid).findFirst();
+        _realm.commitTransaction();
+        return album;
+    }
+
     public static int getNbAlbumsByArtist(Realm _realm, int _pid) {
         _realm.beginTransaction();
         RealmResults<Album> results = _realm.where(Album.class).equalTo("artist", _pid).findAll();

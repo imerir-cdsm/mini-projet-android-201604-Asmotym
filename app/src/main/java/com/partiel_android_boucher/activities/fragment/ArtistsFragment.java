@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.partiel_android_boucher.R;
 import com.partiel_android_boucher.classes.Artist;
@@ -18,13 +20,15 @@ import com.partiel_android_boucher.controllers.ArtistController;
 import com.partiel_android_boucher.tools.RealmConfig;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class ArtistsFragment extends Fragment {
-    private ListView artistsList;
+    private static ListView artistsList;
     ArrayList<Artist> artists;
+    private static View view;
 
     public ArtistsFragment(){
 
@@ -44,20 +48,29 @@ public class ArtistsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        view = getView();
+        ArtistController.downloadAllArtists(getContext());
 
-        if (RealmArtist.getAllArtist(RealmConfig.realm).size() == 0) {
-            RealmArtist.clearArtist(RealmConfig.realm);
-            ArtistController.downloadAllArtists(getContext());
-        }
-        artists = RealmArtist.getAllArtist(RealmConfig.realm);
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                artistsList = (ListView) getView().findViewById(R.id.artistsList);
-                ArtistsAdapter artistsAdapter = new ArtistsAdapter(getContext(), artists);
-                artistsList.setAdapter(artistsAdapter);
-            }
-        }, 2000);
+    public static void setUpAdapter(ArrayList<Artist> _artists) {
+        artistsList = (ListView) view.findViewById(R.id.artistsList);
+        ArtistsAdapter artistsAdapter = new ArtistsAdapter(view.getContext(), _artists);
+        artistsList.setAdapter(artistsAdapter);
+        artistsList.setOnItemClickListener(new OnArtistItemClickListener(artistsAdapter));
+    }
+}
+
+class OnArtistItemClickListener implements ListView.OnItemClickListener {
+    private ArtistsAdapter artistsAdapter;
+
+    public OnArtistItemClickListener(ArtistsAdapter _artistsAdapter) {
+        this.artistsAdapter = _artistsAdapter;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Artist artist = (Artist) artistsAdapter.getItem(position);
+        Toast.makeText(view.getContext(), artist.toString(), Toast.LENGTH_SHORT).show();
     }
 }

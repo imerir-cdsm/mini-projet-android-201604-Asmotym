@@ -3,6 +3,7 @@ package com.partiel_android_boucher.controllers;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.partiel_android_boucher.activities.fragment.AlbumsFragment;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.Artist;
 import com.partiel_android_boucher.classes.realm_classes.RealmAlbum;
@@ -39,6 +40,7 @@ public class AlbumController {
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
+                AlbumsFragment.setUpAdapter(RealmAlbum.getAllAlbum(RealmConfig.realm));
             }
         });
     }
