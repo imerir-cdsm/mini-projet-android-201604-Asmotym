@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.partiel_android_boucher.R;
 import com.partiel_android_boucher.classes.Artist;
+import com.partiel_android_boucher.classes.realm_classes.RealmAlbum;
+import com.partiel_android_boucher.tools.RealmConfig;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -59,6 +61,13 @@ public class ArtistsAdapter extends BaseAdapter {
 
         Picasso.with(this.context).load(artist.getPhotoUrl()).resize(40, 40).centerCrop().into(artistImage);
         artistName.setText(artist.toString());
+        int nbAlbums = RealmAlbum.getNbAlbumsByArtist(RealmConfig.realm, artist.getPid());
+        if (nbAlbums < 2) {
+            artistNbAlbums.setText(nbAlbums + " Album");
+        } else {
+            artistNbAlbums.setText(nbAlbums + " Albums");
+        }
+
 
         return convertView;
     }

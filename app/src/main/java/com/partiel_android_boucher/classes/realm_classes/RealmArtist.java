@@ -1,5 +1,7 @@
 package com.partiel_android_boucher.classes.realm_classes;
 
+import android.util.Log;
+
 import com.partiel_android_boucher.classes.Artist;
 
 import java.util.ArrayList;
@@ -45,6 +47,12 @@ public class RealmArtist {
         Artist artist = _realm.where(Artist.class).equalTo("pid", _pid).findFirst();
         _realm.commitTransaction();
         return artist;
+    }
+
+    public static void clearArtist(Realm _realm) {
+        _realm.beginTransaction();
+        _realm.delete(Artist.class);
+        _realm.commitTransaction();
     }
 
 }

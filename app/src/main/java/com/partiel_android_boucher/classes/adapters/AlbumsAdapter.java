@@ -82,22 +82,3 @@ public class AlbumsAdapter extends BaseAdapter {
         return convertView;
     }
 }
-
-class AlbumsRunnable implements Runnable {
-    private Context context;
-    private int pid;
-    private TextView textView;
-    private Artist artist;
-
-    public AlbumsRunnable(Context _context, int _pid, TextView _textView){
-        this.context = _context;
-        this.pid = _pid;
-        this.textView = _textView;
-    }
-
-    @Override
-    public void run() {
-        //artist = AlbumController.getArtistByPid(this.context, this.pid);
-        textView.setText(artist.toString());
-    }
-}

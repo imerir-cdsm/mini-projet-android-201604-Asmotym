@@ -49,4 +49,17 @@ public class RealmAlbum {
         }
     }
 
+    public static int getNbAlbumsByArtist(Realm _realm, int _pid) {
+        _realm.beginTransaction();
+        RealmResults<Album> results = _realm.where(Album.class).equalTo("artist", _pid).findAll();
+        _realm.commitTransaction();
+        return results.size();
+    }
+
+    public static void clearAlbums(Realm _realm) {
+        _realm.beginTransaction();
+        _realm.delete(Album.class);
+        _realm.commitTransaction();
+    }
+
 }

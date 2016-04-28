@@ -15,6 +15,7 @@ import com.partiel_android_boucher.activities.MainActivity;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.adapters.AlbumsAdapter;
 import com.partiel_android_boucher.classes.realm_classes.RealmAlbum;
+import com.partiel_android_boucher.classes.realm_classes.RealmArtist;
 import com.partiel_android_boucher.controllers.AlbumController;
 import com.partiel_android_boucher.tools.GlobalVariables;
 import com.partiel_android_boucher.tools.RealmConfig;
@@ -48,6 +49,7 @@ public class AlbumsFragment extends Fragment {
         super.onResume();
 
         if (RealmAlbum.getAllAlbum(RealmConfig.realm).size() == 0) {
+            RealmAlbum.clearAlbums(RealmConfig.realm);
             AlbumController.downloadAllAlbums(getContext());
         }
         albums = RealmAlbum.getAllAlbum(RealmConfig.realm);

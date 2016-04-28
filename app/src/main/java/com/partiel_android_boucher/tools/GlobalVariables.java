@@ -11,4 +11,5 @@ public class GlobalVariables {
     public static String ALBUMS_URI = "albums";
     public static String ARTISTS = "artists";
     public static String ARTISTS_PID = "artists/";
+    public static String GENRES_URI = "genres";
 }

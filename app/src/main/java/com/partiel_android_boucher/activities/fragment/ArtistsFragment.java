@@ -26,7 +26,7 @@ public class ArtistsFragment extends Fragment {
     private ListView artistsList;
     ArrayList<Artist> artists;
 
-    public  ArtistsFragment(){
+    public ArtistsFragment(){
 
     }
 
@@ -46,6 +46,7 @@ public class ArtistsFragment extends Fragment {
         super.onResume();
 
         if (RealmArtist.getAllArtist(RealmConfig.realm).size() == 0) {
+            RealmArtist.clearArtist(RealmConfig.realm);
             ArtistController.downloadAllArtists(getContext());
         }
         artists = RealmArtist.getAllArtist(RealmConfig.realm);
