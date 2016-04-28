@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.partiel_android_boucher.activities.AlbumDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:padding="10dp"
+            android:background="@drawable/album_details_background">
+
+            <ImageView
+                android:id="@+id/albumDetailsImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:background="@color/colorBlack"
+                android:layout_margin="15dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/albumDetailsImage">
+
+                <TextView
+                    android:id="@+id/albumDetailsName"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:text="Album name"/>
+
+                <TextView
+                    android:id="@+id/albumDetailsArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="20sp"
+                    android:layout_below="@+id/albumDetailsName"
+                    android:text="Artist name"/>
+
+                <TextView
+                    android:id="@+id/albumDetailsNbTracks"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/albumDetailsArtist"
+                    android:layout_marginTop="5dp"
+                    android:text="Number of tracks : "/>
+
+                <TextView
+                    android:id="@+id/albumDetailsDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="Duration : "/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/listTracks"
+            android:layout_below="@id/details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
