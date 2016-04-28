@@ -13,18 +13,27 @@ import io.realm.RealmResults;
  */
 public class RealmAlbum {
 
+    /*
+    Copy an object into realm
+     */
     public static void copyToRealm(Realm _realm, Album _album){
         _realm.beginTransaction();
         _realm.copyToRealm(_album);
         _realm.commitTransaction();
     }
 
-    public static void creatObjectFromJson(Realm _realm, String _json){
+    /*
+    Create a realm object with a json
+     */
+    public static void createObjectFromJson(Realm _realm, String _json){
         _realm.beginTransaction();
         _realm.createObjectFromJson(Album.class, _json);
         _realm.commitTransaction();
     }
 
+    /*
+    Get the name of the artist for an album
+     */
     public static String getAlbumArtist(Realm _realm, int _pid){
         String artistName;
         _realm.beginTransaction();
@@ -33,6 +42,9 @@ public class RealmAlbum {
         return artistName;
     }
 
+    /*
+    Get all albums
+     */
     public static ArrayList<Album> getAllAlbum(Realm _realm){
         _realm.beginTransaction();
         ArrayList<Album> albums = new ArrayList<>();
@@ -49,6 +61,9 @@ public class RealmAlbum {
         }
     }
 
+    /*
+    Get an album with the id
+     */
     public static Album getAlbumByPid(Realm _realm, int _aid){
         _realm.beginTransaction();
         Album album = _realm.where(Album.class).equalTo("aid", _aid).findFirst();
@@ -56,6 +71,9 @@ public class RealmAlbum {
         return album;
     }
 
+    /*
+    Get the number of album of an artist
+     */
     public static int getNbAlbumsByArtist(Realm _realm, int _pid) {
         _realm.beginTransaction();
         RealmResults<Album> results = _realm.where(Album.class).equalTo("artist", _pid).findAll();
@@ -63,6 +81,9 @@ public class RealmAlbum {
         return results.size();
     }
 
+    /*
+    Clear realm of Album class
+     */
     public static void clearAlbums(Realm _realm) {
         _realm.beginTransaction();
         _realm.delete(Album.class);

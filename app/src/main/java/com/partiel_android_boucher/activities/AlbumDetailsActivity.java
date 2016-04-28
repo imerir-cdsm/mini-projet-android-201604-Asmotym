@@ -33,7 +33,6 @@ public class AlbumDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_details);
-        RealmConfig.configure(this);
         aid = getIntent().getExtras().getInt("aid");
         getAlbumDetails();
         TrackController.downloadTracksWithAid(this, aid);
