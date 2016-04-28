@@ -1,5 +1,6 @@
 package com.partiel_android_boucher.activities.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.partiel_android_boucher.R;
+import com.partiel_android_boucher.activities.AlbumDetailsActivity;
 import com.partiel_android_boucher.activities.MainActivity;
 import com.partiel_android_boucher.classes.Album;
 import com.partiel_android_boucher.classes.adapters.AlbumsAdapter;
@@ -41,6 +43,7 @@ public class AlbumsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AlbumController.downloadAllAlbums(getContext());
     }
 
     @Nullable
@@ -52,7 +55,7 @@ public class AlbumsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         view = getView();
-        AlbumController.downloadAllAlbums(getContext());
+        setUpAdapter(RealmAlbum.getAllAlbum(RealmConfig.realm));
     }
 
     public static void setUpAdapter(ArrayList<Album> _albums) {
@@ -76,6 +79,9 @@ class OnAlbumItemClickListener implements ListView.OnItemClickListener {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Album album = (Album) albumsAdapter.getItem(position);
         Toast.makeText(view.getContext(), album.getTitle(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(view.getContext(), AlbumDetailsActivity.class);
+        intent.putExtra("aid", album.getAid());
+        view.getContext().startActivity(intent);
     }
 
 }

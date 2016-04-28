@@ -37,6 +37,7 @@ public class GenresFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GenreController.downloadAllGenres(getContext());
     }
 
     @Nullable
@@ -49,7 +50,7 @@ public class GenresFragment extends Fragment {
     public void onResume() {
         super.onResume();
         view = getView();
-        GenreController.downloadAllGenres(getContext());
+        setUpAdapter(RealmGenre.getAllGenre(RealmConfig.realm));
     }
 
     public static void setUpAdapter(ArrayList<Genre> _genres) {

@@ -40,7 +40,7 @@ public class AlbumController {
                 } catch (JSONException jse){
                     jse.printStackTrace();
                 }
-                AlbumsFragment.setUpAdapter(RealmAlbum.getAllAlbum(RealmConfig.realm));
+                //AlbumsFragment.setUpAdapter(RealmAlbum.getAllAlbum(RealmConfig.realm));
             }
         });
     }

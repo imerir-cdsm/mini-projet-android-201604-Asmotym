@@ -37,6 +37,7 @@ public class ArtistsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ArtistController.downloadAllArtists(getContext());
     }
 
     @Nullable
@@ -49,8 +50,7 @@ public class ArtistsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         view = getView();
-        ArtistController.downloadAllArtists(getContext());
-
+        setUpAdapter(RealmArtist.getAllArtist(RealmConfig.realm));
     }
 
     public static void setUpAdapter(ArrayList<Artist> _artists) {

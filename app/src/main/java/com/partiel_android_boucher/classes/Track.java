@@ -1,11 +1,12 @@
 package com.partiel_android_boucher.classes;
 
+import io.realm.RealmObject;
+
 /**
  * Created by boucherclement on 27/04/16.
  */
-public class Track {
+public class Track extends RealmObject {
     private int tid;
-    private int album;
     private String title;
     private int duration;
 
@@ -13,9 +14,8 @@ public class Track {
 
     }
 
-    public Track(int _tid, int _album, String _title, int _duration){
+    public Track(int _tid, String _title, int _duration){
         setTid(_tid);
-        setAlbum(_album);
         setTitle(_title);
         setDuration(_duration);
     }
@@ -26,14 +26,6 @@ public class Track {
 
     public void setTid(int tid) {
         this.tid = tid;
-    }
-
-    public int getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(int album) {
-        this.album = album;
     }
 
     public String getTitle() {
